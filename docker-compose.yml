@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  app:
+    container_name: ${DOCKER_IMAGE_APP_NAME}
+    image: ${DOCKER_IMAGE_APP_NAME}:latest
+    build:
+      context: .
+      args:
+        DOCKER_IMAGE_APP_PATH: ${DOCKER_IMAGE_APP_PATH}
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:${DOCKER_IMAGE_APP_PATH}:cached
+    command: bundle exec ./bin/console
